@@ -43,7 +43,7 @@ export default {
             {
                 location: {
                     lat: 37.554055,
-                    lng: 126.922452
+                    lng: 126.9242
                 },
                 addr : '마포구 동교로',
                 post : {   
@@ -57,7 +57,7 @@ export default {
                         {
                 location: {
                     lat: 37.554055,
-                    lng: 126.92400
+                    lng: 126.9241
                 },
                 addr : '마포구 동교로',
                 post : {   
@@ -88,6 +88,7 @@ export default {
             this.$axios.get('http://106.10.50.27:5000/pin?x1=' + this.bound.ia.j + '&y1=' + this.bound.na.j 
             + '&x2=' + this.bound.ia.l + '&y2=' + this.bound.na.l).then(response=>{
                 this.points = response.data
+                this.muergeSameSpots()
             })
         },
         boundsChanged(bound){
@@ -109,6 +110,27 @@ export default {
             return {
                 text: count,
                 index: index
+            }
+        },
+        muergeSameSpots(){
+            this.points.map(point=>{
+                point.location.lat = Math.round(point.location.lat * 10000)/10000
+                point.location.lng = Math.round(point.location.lng * 10000)/10000
+                return point
+            })
+            var temp ={}
+            for(var point of this.points){
+                var key = String(point.location.lng) + "," + String(point.location.lat)
+                if(temp[key] == undefined){
+                    temp[key] = point
+                }
+                else{
+                    temp[key].post.num += point.post.num
+                }
+            }
+            this.points = []
+            for(var i in temp){
+                this.points.push(temp[i])
             }
         }
     }
