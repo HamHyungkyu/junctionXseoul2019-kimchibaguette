@@ -46,18 +46,5 @@ export default {
             this.marker = vue.marker
         }
     },
-    mounted() {
-        this.$axios({
-            headers: {
-                "X-NCP-APIGW-API-KEY-ID": "l912l4ua42",
-	            "X-NCP-APIGW-API-KEY": "0f3Sp1v5vLusl4JQhh32xZr542MwqIGuCnrAg527"
-            },
-            url: 'https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=126.9913201,37.5666936&sourcecrs=epsg:4326&orders=admcode,legalcode,addr,roadaddr&output=xml',
-            // url : 'https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords='+ this.point.location.lng + ',' + this.point.location.lat,
-            method: 'GET'
-        }).then(function(response){
-            console.log(response)
-        })
-    },
 }
 </script>

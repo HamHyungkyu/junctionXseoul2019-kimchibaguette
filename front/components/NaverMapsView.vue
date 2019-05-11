@@ -3,9 +3,12 @@
     :height="812"
     :width="375"
     :mapOptions="mapOptions"
-    :initLayers="['BACKGROUND', 'BACKGROUND_DETAIL', 'BYCYCLE', 'CADASTRAL', 'CTT', 'HIKING_TRAIL', 'PANORAMA', 'POI_KOREAN', 'TRANSIT']"
+    :initLayers="['BACKGROUND']"
+    @load="onLoad"
+    @
     >
-    <hotplace-marker v-for="(point, i) in points" :key="i" :point="point"></hotplace-marker>
+    <naver-marker :lng="126" :lat="37" @click="onMarkerClicked"></naver-marker>
+    <hotplace-marker  v-for="(point, i) in points" :key="i" :point="point"></hotplace-marker>
     </naver-maps>
 </template>
 <script>
@@ -41,25 +44,50 @@ export default {
                         ],
                     category: 'food'
                 }
+            },
+                        {
+                location: {
+                    lat: 37.554055,
+                    lng: 126.92400
+                },
+                post : {   
+                    time: "20190523",
+                    tags: [
+                        '#hongdae'
+                        ],
+                    category: 'food'
+                }
             }
         ]
         }
     },
     computed: {
-        hello() {
-        return `Hello, World! × ${this.count}`;
+        points_() {
+            var points 
+            this.$axios.get('').then(response=>{
+                points = response.data
+            })
+            return points
         }
     },
     methods: {
         onLoad(vue) {
+            this.map = vue.map
         },
         onWindowLoad(that) {
         },
         onMarkerClicked(event) {
         this.info = !this.info;
+        console.log(this.hello)
+
         },
         onMarkerLoaded(vue) {
         this.marker = vue.marker;
+        }
+    },
+    watch: {
+        map: function(){
+            console.log(this.hello)
         }
     },
     mounted() {
