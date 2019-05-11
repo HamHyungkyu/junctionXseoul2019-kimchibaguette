@@ -11,7 +11,7 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_axios_25330d43 from 'nuxt_plugin_axios_25330d43' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_axios_3485a8f2 from 'nuxt_plugin_axios_3485a8f2' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_elementui_d905880e from 'nuxt_plugin_elementui_d905880e' // Source: ../plugins/element-ui (mode: 'all')
 import nuxt_plugin_googlemaps_0dbc6940 from 'nuxt_plugin_googlemaps_0dbc6940' // Source: ../plugins/google-maps.js (mode: 'all')
 
@@ -149,8 +149,8 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_axios_25330d43 === 'function') {
-    await nuxt_plugin_axios_25330d43(app.context, inject)
+  if (typeof nuxt_plugin_axios_3485a8f2 === 'function') {
+    await nuxt_plugin_axios_3485a8f2(app.context, inject)
   }
 
   if (typeof nuxt_plugin_elementui_d905880e === 'function') {
