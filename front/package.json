@@ -14,8 +14,10 @@
     "@nuxtjs/axios": "^5.3.6",
     "cross-env": "^5.2.0",
     "element-ui": "^2.4.11",
+    "marker-clusterer-plus": "^2.1.4",
     "nuxt": "^2.4.0",
-    "vue-naver-maps": "^0.11.5"
+    "vue-naver-maps": "^0.11.5",
+    "vue2-google-maps": "^0.10.6"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

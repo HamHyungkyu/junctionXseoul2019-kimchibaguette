@@ -35,7 +35,7 @@ export default {
   */
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/naver-maps.js'
+    '@/plugins/google-maps.js'
   ],
 
   /*
@@ -49,6 +49,8 @@ export default {
   ** Axios module configuration
   */
   axios: {
+    proxyHeaders : false,
+    credentials : false
     // See https://github.com/nuxt-community/axios-module#options
   },
 
