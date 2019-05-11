@@ -8,7 +8,7 @@
     @zoom_changed="fetchData"
     @bounds_changed="boundsChanged"
     >
-    <GmapCluster maxZoom="17" :calculator="makerCalculator">
+    <GmapCluster :maxZoom=17 :calculator="makerCalculator">
     <hotplace-marker  v-for="(point, i) in points" :key="i" :point="point"></hotplace-marker>
     </GmapCluster>
     </GmapMap>
