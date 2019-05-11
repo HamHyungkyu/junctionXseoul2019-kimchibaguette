@@ -3,7 +3,7 @@
         hello
     </el-card>
 </template>
-<<script>
+<script>
 export default {
     computed:{
         

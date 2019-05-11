@@ -1,23 +1,40 @@
 <template>
-    <GmapMap class="map"
-    :center="center"
-    :zoom="zoom"
-    :options="mapOptions"
-    style="width: 375px; height: 667px"
-    @dragend="fetchData"
-    @zoom_changed="fetchData"
-    @bounds_changed="boundsChanged"
-    >
-    <GmapCluster :maxZoom=17 :calculator="makerCalculator">
-    <hotplace-marker  v-for="(point, i) in points" :key="i" :point="point"></hotplace-marker>
-    </GmapCluster>
-    </GmapMap>
+    <div>
+        <div style="display: flex;">
+            <p style="height: 62px;">chameleon</p>
+            <el-button @click="changehash()">#</el-button>
+        </div>
+        <div class="main-container">
+            <div class="main-container-item" v-show="hash==''">
+                <GmapMap class="map"
+                :center="center"
+                :zoom="zoom"
+                :options="mapOptions"
+                style="width: 375px; height: 750px"
+                @dragend="fetchData"
+                @zoom_changed="fetchData"
+                @bounds_changed="boundsChanged"
+                >
+                    <GmapCluster :maxZoom=17 :calculator="makerCalculator">
+                        <hotplace-marker  v-for="(point, i) in points" :key="i" :point="point"></hotplace-marker>
+                    </GmapCluster>
+                </GmapMap>
+            </div>
+            <div class="main-container-item">
+                <hashtags></hashtags>
+            </div>
+        </div>
+    </div>
 </template>
+
 <script>
 import HotplaceMarker from '@/components/HotplaceMarker'
+import Hashtags from '@/components/Hashtags'
+
 export default {
     components: {
-        HotplaceMarker
+        HotplaceMarker,
+        Hashtags
     },
     data() {
         return {
@@ -67,10 +84,18 @@ export default {
                     ,
                 }
             }
-        ]
+        ],
+        hash: ''
         }
     },
     methods: {
+        changehash() {
+            if(this.hash == 'hash') {
+                this.hash = ''
+            } else {
+                this.hash = 'hash'
+            }
+        },
         onLoad(vue) {
             this.map = vue.map
         },
@@ -138,8 +163,24 @@ export default {
 </script>
 
 <style>
-.map {
-    width: 375px;
-    height: 812px;
+.main-container {
+    height: 750px;
+    width: 200%;
+    overflow: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.main-container-item {
+    height: 750px;
+    width: 100vw;
+    
+    transform: translate(0, 0);
+    transition: transform 300ms;
+}
+
+.main-container-item.hash {
+    -webkit-transform: translate(-100vw, 0);
+    transform: translate(-100vw, 0);
 }
 </style>
