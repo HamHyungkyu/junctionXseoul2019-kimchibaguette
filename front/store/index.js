@@ -23,17 +23,16 @@ const store = () => new Vuex.Store({
       for(var i of state.points){
         if(points.filter(e=> {
           return e.name == i.name
-        }).length == 1 ){
+        }).length === 1 ){
           newState.push(i)
         }
       }
       state.points = newState
     },
     addPoint(state, data) {
-     
       if(state.points.filter(e=> {
         return e.name == data.name
-      }).length == 0 ){
+      }).length === 0 ){
         state.points.push(data);
 
       }
