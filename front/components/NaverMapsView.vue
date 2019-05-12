@@ -2,8 +2,8 @@
     <div style="height: 100vh; overflow: hidden;">
         <div style="display: flex;">
             <img src="/logo.png" style="width: 250px; height: 85px;">
-            <el-button v-show="hash==''" circle style="font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">#</el-button>
-            <el-button v-show="hash!=''" circle style="font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">&lt;</el-button>
+            <el-button v-show="hash==''" circle style="font-weight: bold; font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">#</el-button>
+            <el-button v-show="hash!=''" circle style="font-weight: bold; font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">&lt;</el-button>
         </div>
         <div class="main-container">
             <div class="main-container-item" v-show="hash==''">
