@@ -18,8 +18,16 @@ const store = () => new Vuex.Store({
       }
   },
   mutations: {
-    cleanPoints(state){
-      state.points = []
+    cleanPoints(state, points){
+      var newState = []
+      for(var i of state.points){
+        if(points.filter(e=> {
+          return e.location.lng == i.location.lng && e.location.lat == i.location.lat
+        }).length > 0 ){
+          newState.push(i)
+        }
+      }
+      state.points = newState
     },
     addPoint(state, data) {
       state.points.push(data);

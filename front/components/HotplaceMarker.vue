@@ -25,7 +25,6 @@ export default {
             info: false,
             marker : '',
             place:{},
-            activeNames: [],
         }
     },
     methods: {
@@ -35,10 +34,8 @@ export default {
         },
         onMarkerLoaded: function(vue){
             this.marker = vue.marker
-        }
-    },
-    watch: {
-        point: function(){
+        },
+        fetchData(){
             this.info = false
             this.activeNames = []
             this.$axios.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
@@ -50,7 +47,16 @@ export default {
                         point.detail = response2.data.result
                         this.$store.commit('addPoint', point)
                 })
-        })
+            })
+        },
+    },
+    created(){
+        this.fetchData()
+    },
+    watch: {
+        'point.name' : function(){
+            this.info = false
+            this.fetchData()
         }
     }
 }

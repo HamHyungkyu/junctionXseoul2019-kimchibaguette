@@ -69,7 +69,12 @@ export default {
             disableDefaultUi: false
         },
         points: [],
-        hash: ''
+        hash: '',
+        filter: {
+            rest: true,
+            pub: true,
+            cafe: true
+        }
         }
     },
     methods: {
@@ -86,13 +91,25 @@ export default {
         onMarkerLoaded(vue) {
         this.marker = vue.marker;
         },
-        fetchData(){
-            this.$store.commit('cleanPoints')
+        fetchData(){      
             this.$axios.get('http://106.10.50.27:5000/pin?x1=' + this.bound.ia.j + '&y1=' + this.bound.na.j 
             + '&x2=' + this.bound.ia.l + '&y2=' + this.bound.na.l).then(response=>{
                 this.points = response.data
+                this.addFilter()
                 this.muergeSameSpots()
+                this.$store.commit('cleanPoints', this.points)
             })
+        },
+        addFilter(){
+            if(!filter.rest){
+                this.points = this.points.filter(e=>e.category != 'rest')
+            }
+            if(!filter.pub){
+                this.points = this.points.filter(e=>e.category != 'pub')
+            }
+            if(!filter.cafe){
+                this.points = this.points.filter(e=>e.category != 'cafe')
+            }
         },
         boundsChanged(bound){
             this.bound = bound
@@ -137,6 +154,11 @@ export default {
             }
         }
     },
+    watch: {
+        filter: function(){
+            this.fetchData()
+        }
+    },
     computed:{
         tags : function () { 
             var tags = {}
@@ -150,7 +172,6 @@ export default {
                     }
                 }
             }
-            console.log(tags)
             return tags
         }
     }
