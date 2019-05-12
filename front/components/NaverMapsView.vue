@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div style="height: 100vh; overflow: hidden;">
         <div style="display: flex;">
-            <p style="height: 62px;">chameleon</p>
-            <el-button @click="changehash()">#</el-button>
+            <img src="/logo.png" style="width: 250px; height: 85px;">
+            <el-button v-show="hash==''" circle style="font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">#</el-button>
+            <el-button v-show="hash!=''" circle style="font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">&lt;</el-button>
         </div>
         <div class="main-container">
             <div class="main-container-item" v-show="hash==''">
@@ -10,7 +11,7 @@
                 :center="center"
                 :zoom="zoom"
                 :options="mapOptions"
-                style="width: 375px; height: 750px"
+                style="width: 375px; height: 650px"
                 @dragend="fetchData"
                 @zoom_changed="fetchData"
                 @bounds_changed="boundsChanged"
@@ -23,6 +24,11 @@
             <div class="main-container-item">
                 <hashtags></hashtags>
             </div>
+        </div>
+        <div style="height: 100px; display: flex; padding: 15px 10px;">
+            <el-button icon="el-icon-menu" style="width: 40px; height: 40px; margin: 5px 10px;" circle></el-button>
+            <el-button style="margin: 0px 30px; font-weight: bold; color: white; background-color: #ff686b; border-radius: 25px;width: 175px; height: 50px;"> {{ points.length }} TRENDY PLACES</el-button>
+            <el-button icon="el-icon-s-tools" style="width: 40px; height: 40px; margin: 5px 10px;" circle></el-button>
         </div>
     </div>
 </template>
@@ -164,7 +170,7 @@ export default {
 
 <style>
 .main-container {
-    height: 750px;
+    height: 650px;
     width: 200%;
     overflow: hidden;
     display: flex;
@@ -172,7 +178,7 @@ export default {
 }
 
 .main-container-item {
-    height: 750px;
+    height: 650px;
     width: 100vw;
     
     transform: translate(0, 0);
@@ -183,4 +189,5 @@ export default {
     -webkit-transform: translate(-100vw, 0);
     transform: translate(-100vw, 0);
 }
+
 </style>
