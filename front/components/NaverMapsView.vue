@@ -11,7 +11,7 @@
                 :center="center"
                 :zoom="zoom"
                 :options="mapOptions"
-                style="width: 375px; height: 650px"
+                style="width: 375px; height: 505px"
                 @dragend="fetchData"
                 @zoom_changed="fetchData"
                 @bounds_changed="boundsChanged"
@@ -191,7 +191,7 @@ export default {
 
 <style>
 .main-container {
-    height: 650px;
+    height: 505px;
     width: 200%;
     overflow: hidden;
     display: flex;
