@@ -15,6 +15,7 @@
                 @dragend="fetchData"
                 @zoom_changed="fetchData"
                 @bounds_changed="boundsChanged"
+                @tilesloaded="fetchData"
                 >
                     <GmapCluster :maxZoom=17 :calculator="makerCalculator">
                         <hotplace-marker  v-for="(point, i) in points" :key="i" :point="point"></hotplace-marker>
@@ -22,7 +23,7 @@
                 </GmapMap>
             </div>
             <div class="main-container-item">
-                <hashtags></hashtags>
+                <hashtags :tags="tags"></hashtags>
             </div>
         </div>
         <div style="height: 100px; display: flex; padding: 15px 10px;">
@@ -62,35 +63,7 @@ export default {
             fullscreenControl: false,
             disableDefaultUi: false
         },
-        points: [
-            {
-                location: {
-                    lat: 37.554055,
-                    lng: 126.9242
-                },
-                addr : '마포구 동교로',
-                post : {   
-                    num : 1,
-                    tags: 
-                        {'#hongdae': 4}
-                    ,
-                }
-            }
-            ,
-                        {
-                location: {
-                    lat: 37.554055,
-                    lng: 126.9241
-                },
-                addr : '마포구 동교로',
-                post : {   
-                    num : 2,
-                    tags: 
-                        {'#hongdae': 4}
-                    ,
-                }
-            }
-        ],
+        points: [],
         hash: ''
         }
     },
@@ -101,16 +74,6 @@ export default {
             } else {
                 this.hash = 'hash'
             }
-        },
-        onLoad(vue) {
-            this.map = vue.map
-        },
-        onWindowLoad(that) {
-        },
-        onMarkerClicked(event) {
-        this.info = !this.info;
-        console.log(this.hello)
-
         },
         onMarkerLoaded(vue) {
         this.marker = vue.marker;
@@ -163,6 +126,23 @@ export default {
             for(var i in temp){
                 this.points.push(temp[i])
             }
+        }
+    },
+    computed:{
+        tags : function () { 
+            var tags = {}
+            for( var point of this.points){
+                for(var tag in point.post.tags){
+                    if(tags[tag] != undefined){
+                        tags[tag] += point.post.tags[tag]
+                    }
+                    else{
+                        tags[tag] = 1
+                    }
+                }
+            }
+            console.log(tags)
+            return tags
         }
     }
 }
