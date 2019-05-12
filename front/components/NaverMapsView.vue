@@ -72,12 +72,12 @@ export default {
         onMarkerLoaded(vue) {
         this.marker = vue.marker;
         },
-        fetchData(){
-            this.$store.commit('cleanPoints')
+        fetchData(){      
             this.$axios.get('http://106.10.50.27:5000/pin?x1=' + this.bound.ia.j + '&y1=' + this.bound.na.j 
             + '&x2=' + this.bound.ia.l + '&y2=' + this.bound.na.l).then(response=>{
                 this.points = response.data
                 this.muergeSameSpots()
+                this.$store.commit('cleanPoints', this.points)
             })
         },
         boundsChanged(bound){
@@ -136,7 +136,6 @@ export default {
                     }
                 }
             }
-            console.log(tags)
             return tags
         }
     }
