@@ -32,13 +32,13 @@
         <div v-show="hash != 'detail'" style="height: 77px; display: flex; padding: 15px 10px; padding-bottom: 0px; overflow: hidden;">
             <el-popover placement="top">
                 <div style="margin: 5px;">
-                    <el-checkbox @change="fetchData()" v-model="filter.rest" label="restaurant" border></el-checkbox>
+                    <el-checkbox style="width: 120px" @change="fetchData()" v-model="filter.rest" label="restaurant" border></el-checkbox>
                 </div>
                 <div style="margin: 5px;">
-                    <el-checkbox @change="fetchData()" v-model="filter.pub" label="pub" border></el-checkbox>
+                    <el-checkbox style="width: 120px" @change="fetchData()" v-model="filter.pub" label="pub" border></el-checkbox>
                 </div>
                 <div style="margin: 5px;">
-                    <el-checkbox @change="fetchData()" v-model="filter.cafe" label="cafe" border></el-checkbox>
+                    <el-checkbox style="width: 120px" @change="fetchData()" v-model="filter.cafe" label="cafe" border></el-checkbox>
                 </div>
                 <el-button icon="el-icon-menu" style="width: 40px; height: 40px; margin: 5px 10px;" circle slot="reference"></el-button>
             </el-popover>

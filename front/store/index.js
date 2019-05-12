@@ -22,15 +22,21 @@ const store = () => new Vuex.Store({
       var newState = []
       for(var i of state.points){
         if(points.filter(e=> {
-          return e.location.lng == i.location.lng && e.location.lat == i.location.lat
-        }).length > 0 ){
+          return e.name == i.name
+        }).length == 1 ){
           newState.push(i)
         }
       }
       state.points = newState
     },
     addPoint(state, data) {
-      state.points.push(data);
+     
+      if(state.points.filter(e=> {
+        return e.name == data.name
+      }).length == 0 ){
+        state.points.push(data);
+
+      }
     },
     setDetails(state, data) {
         state.details = data;
