@@ -25,7 +25,6 @@ export default {
             info: false,
             marker : '',
             place:{},
-            activeNames: [],
         }
     },
     methods: {
@@ -55,8 +54,9 @@ export default {
         this.fetchData()
     },
     watch: {
-        point: function(){
-            this.fetchData
+        'point.name' : function(){
+            this.info = false
+            this.fetchData()
         }
     }
 }
