@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _564e052c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _7b4d2afb = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -80,7 +80,7 @@ export function createRouter() {
 
     routes: [{
       path: "/",
-      component: _564e052c,
+      component: _7b4d2afb,
       name: "index"
     }],
 
