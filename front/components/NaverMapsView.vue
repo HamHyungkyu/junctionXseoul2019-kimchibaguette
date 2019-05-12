@@ -1,16 +1,17 @@
 <template>
-    <div>
-        <div style="display: flex;">
-            <p style="height: 62px;">chameleon</p>
-            <el-button @click="changehash()">#</el-button>
+    <div style="height: 100vh; overflow-x: hidden;">
+        <div style="display: flex; overflow:hidden;">
+            <img src="/logo.png" style="width: 250px; height: 85px;">
+            <el-button v-show="hash==''" circle style="font-weight: bold; font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">#</el-button>
+            <el-button v-show="hash!=''" circle style="font-weight: bold; font-size: 15px; border-color: #ff686b; outline: none; margin-right: 5px; margin-left: 70px; margin-top:22.5px; width: 40px; height: 40px;" @click="changehash()">&lt;</el-button>
         </div>
-        <div class="main-container">
+        <div class="main-container" style="overflow:hidden" v-show="hash !='detail'">
             <div class="main-container-item" v-show="hash==''">
                 <GmapMap class="map"
                 :center="center"
                 :zoom="zoom"
                 :options="mapOptions"
-                style="width: 375px; height: 750px"
+                style="width: 375px; height: 650px"
                 @dragend="fetchData"
                 @zoom_changed="fetchData"
                 @bounds_changed="boundsChanged"
@@ -21,9 +22,17 @@
                     </GmapCluster>
                 </GmapMap>
             </div>
-            <div class="main-container-item">
+            <div v-show="hash=='hash'" class="main-container-item">
                 <hashtags :tags="tags"></hashtags>
             </div>
+        </div>
+        <div v-show="hash == 'detail'" style="overflow: auto; min-height: calc(100vh - 85px);">
+            <detail-page></detail-page>
+        </div>
+        <div v-show="hash != 'detail'" style="height: 77px; display: flex; padding: 15px 10px; padding-bottom: 0px; overflow: hidden;">
+            <el-button icon="el-icon-menu" style="width: 40px; height: 40px; margin: 5px 10px;" circle></el-button>
+            <el-button @click="changehashdetail()" style="margin: 0px 30px; font-weight: bold; color: white; background-color: #ff686b; border-radius: 25px;width: 175px; height: 50px;"> {{ points.length }} TRENDY PLACES</el-button>
+            <el-button icon="el-icon-s-tools" style="width: 40px; height: 40px; margin: 5px 10px;" circle></el-button>
         </div>
     </div>
 </template>
@@ -31,11 +40,13 @@
 <script>
 import HotplaceMarker from '@/components/HotplaceMarker'
 import Hashtags from '@/components/Hashtags'
+import DetailPage from '@/components/DetailPage'
 
 export default {
     components: {
         HotplaceMarker,
-        Hashtags
+        Hashtags,
+        DetailPage
     },
     data() {
         return {
@@ -68,11 +79,14 @@ export default {
     },
     methods: {
         changehash() {
-            if(this.hash == 'hash') {
-                this.hash = ''
-            } else {
+            if(this.hash != 'hash' && this.hash != 'detail') {
                 this.hash = 'hash'
+            } else {
+                this.hash = ''
             }
+        },
+        changehashdetail() {
+            this.hash = 'detail'
         },
         onMarkerLoaded(vue) {
         this.marker = vue.marker;
@@ -166,7 +180,7 @@ export default {
 
 <style>
 .main-container {
-    height: 750px;
+    height: 650px;
     width: 200%;
     overflow: hidden;
     display: flex;
@@ -174,7 +188,7 @@ export default {
 }
 
 .main-container-item {
-    height: 750px;
+    height: 650px;
     width: 100vw;
     
     transform: translate(0, 0);
@@ -185,4 +199,5 @@ export default {
     -webkit-transform: translate(-100vw, 0);
     transform: translate(-100vw, 0);
 }
+
 </style>
