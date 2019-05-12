@@ -30,7 +30,18 @@
             <detail-page></detail-page>
         </div>
         <div v-show="hash != 'detail'" style="height: 77px; display: flex; padding: 15px 10px; padding-bottom: 0px; overflow: hidden;">
-            <el-button icon="el-icon-menu" style="width: 40px; height: 40px; margin: 5px 10px;" circle></el-button>
+            <el-popover placement="top">
+                <div style="margin: 5px;">
+                    <el-checkbox @change="fetchData()" v-model="filter.rest" label="restaurant" border></el-checkbox>
+                </div>
+                <div style="margin: 5px;">
+                    <el-checkbox @change="fetchData()" v-model="filter.pub" label="pub" border></el-checkbox>
+                </div>
+                <div style="margin: 5px;">
+                    <el-checkbox @change="fetchData()" v-model="filter.cafe" label="cafe" border></el-checkbox>
+                </div>
+                <el-button icon="el-icon-menu" style="width: 40px; height: 40px; margin: 5px 10px;" circle slot="reference"></el-button>
+            </el-popover>
             <el-button @click="changehashdetail()" style="margin: 0px 30px; font-weight: bold; color: white; background-color: #ff686b; border-radius: 25px;width: 175px; height: 50px;"> {{ points.length }} TRENDY PLACES</el-button>
             <el-button icon="el-icon-s-tools" style="width: 40px; height: 40px; margin: 5px 10px;" circle></el-button>
         </div>
@@ -101,13 +112,13 @@ export default {
             })
         },
         addFilter(){
-            if(!filter.rest){
+            if(!this.filter.rest){
                 this.points = this.points.filter(e=>e.category != 'rest')
             }
-            if(!filter.pub){
+            if(!this.filter.pub){
                 this.points = this.points.filter(e=>e.category != 'pub')
             }
-            if(!filter.cafe){
+            if(!this.filter.cafe){
                 this.points = this.points.filter(e=>e.category != 'cafe')
             }
         },
