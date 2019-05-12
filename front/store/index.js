@@ -6,35 +6,7 @@ Vue.use(Vuex);
 
 const store = () => new Vuex.Store({
   state: {
-    points: [
-        {
-            location: {
-                lat: 37.554055,
-                lng: 126.922452
-            },
-            addr : '마포구 동교로',
-            post : {   
-                num : 1,
-                tags: 
-                    {'#hongdae': 4}
-                ,
-            }
-        }
-        ,
-                    {
-            location: {
-                lat: 37.554055,
-                lng: 126.92400
-            },
-            addr : '마포구 동교로',
-            post : {   
-                num : 2,
-                tags: 
-                    {'#hongdae': 4}
-                ,
-            }
-        }
-    ],
+    points: [],
     details: []
   },
   getters: {
@@ -46,8 +18,11 @@ const store = () => new Vuex.Store({
       }
   },
   mutations: {
-    setPoints(state, data) {
-      state.pricingData = data;
+    cleanPoints(state){
+      state.points = []
+    },
+    addPoint(state, data) {
+      state.points.push(data);
     },
     setDetails(state, data) {
         state.details = data;

@@ -26,7 +26,6 @@ export default {
             marker : '',
             place:{},
             activeNames: [],
-            weekday_text: ["not supported"],
         }
     },
     methods: {
@@ -47,18 +46,12 @@ export default {
                 +'&key=AIzaSyCRfZVReuq7z6dmpTsjJcjTb1SOzHVsaN8').then(response=>{
                     var place = response.data.results[0]
                     this.$axios.get('http://106.10.50.27:5000/map?placeid=' + place.place_id ).then(response2 =>{
-                        this.place = response2.data.result
-                        if(this.place != undefined && this.place.opening_hours != undefined)
-                            this.weekday_text = this.place.opening_hours.weekday_text
+                        var point = this.point
+                        point.detail = response2.data.result
+                        this.$store.commit('addPoint', point)
                 })
         })
         }
-    },
-    computed:  {
-       weekday_text: function(){
-           console.log(this.place)
-       
-       }
-    },
+    }
 }
 </script>
